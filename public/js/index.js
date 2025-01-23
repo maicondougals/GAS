@@ -1,5 +1,11 @@
-// Carrinho
-let cartCount = 0;
+// =============================================================================
+// VARIÁVEIS GLOBAIS E CONSTANTES
+// =============================================================================
+
+let cartCount = 0; // Contador global de itens no carrinho
+const cart = []; // Array para armazenar os itens do carrinho
+
+// Constantes para os elementos do DOM que são frequentemente acessados
 const cartIndicator = document.getElementById('cart-count');
 const cartIcon = document.getElementById('cart-indicator');
 const pluralS = document.getElementById('plural-s');
@@ -14,19 +20,24 @@ const houseNumberInput = document.getElementById('house-number');
 const cepInput = document.getElementById('cep');
 const observationInput = document.getElementById('observation');
 
-let cart = [];
+// =============================================================================
+// FUNÇÕES AUXILIARES
+// =============================================================================
 
+// Atualiza o indicador de quantidade de itens no carrinho
 function updateCartIndicator() {
     cartIndicator.textContent = cartCount;
     pluralS.textContent = cartCount === 1 ? '' : 'ns';
-    validateForm();
+    validateForm(); // Aproveita para validar o formulário sempre que o carrinho é atualizado
 }
 
+// Atualiza o conteúdo do modal do carrinho
 function updateCartModal() {
-    cartItemsList.innerHTML = ''; // Limpa a lista atual
+    cartItemsList.innerHTML = ''; // Limpa a lista de itens do modal
 
     let total = 0;
 
+    // Itera sobre cada item no carrinho
     cart.forEach(item => {
         const li = document.createElement('li');
         li.classList.add('cart-item');
@@ -43,36 +54,16 @@ function updateCartModal() {
         itemPrice.classList.add('cart-item-price');
         itemPrice.textContent = `R$ ${(item.price * item.quantity).toFixed(2)}`;
 
+        // Botão para remover o item do carrinho
         const removeButton = document.createElement('button');
         removeButton.classList.add('remove-item');
         removeButton.textContent = 'Remover';
         removeButton.addEventListener('click', () => {
-            // Remove todas as unidades do item
-            const itemToRemove = cart.find(cartItem => cartItem.id === item.id);
-            if (itemToRemove) {
-                cartCount -= itemToRemove.quantity;
-                cart = cart.filter(cartItem => cartItem.id !== item.id);
-            }
+            removeFromCart(item.id); // Remove o item pelo ID
 
             // Atualiza o botão correspondente na página principal
             const buttonWrapper = document.getElementById(item.id);
-            const button = buttonWrapper.querySelector('.option-button');
-            const counter = buttonWrapper.querySelector('.counter');
-            const quantitySpan = counter.querySelector('.quantity');
-
-            // Reseta a variável quantity do botão
-            buttonWrapper.quantity = 0;
-
-            // Reseta o contador do item removido
-            quantitySpan.textContent = '0';
-            counter.style.display = 'none';
-            button.style.display = 'block';
-
-            // Atualiza o modal e o indicador do carrinho
-            updateCartIndicator();
-            updateCartModal();
-            saveCartToLocalStorage(); // Salva o carrinho atualizado
-            saveButtonStateToLocalStorage(item.id, 0); // Salva o estado do botão zerado
+            updateButtonState(item.id, 0); // Reseta o estado do botão
         });
 
         li.appendChild(itemName);
@@ -84,126 +75,137 @@ function updateCartModal() {
         total += item.price * item.quantity;
     });
 
-    // Adiciona a taxa de entrega ao total
+    // Adiciona a taxa de entrega ao total, se houver
     const selectedNeighborhood = neighborhoodSelect.options[neighborhoodSelect.selectedIndex];
     const deliveryFee = selectedNeighborhood ? parseFloat(selectedNeighborhood.dataset.fee) : 0;
     total += deliveryFee;
 
-    cartTotalValue.textContent = total.toFixed(2);
+    cartTotalValue.textContent = total.toFixed(2); // Atualiza o valor total
 }
 
+// Adiciona um item ao carrinho
 function addToCart(productName, productId, productPrice) {
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) {
-        existingItem.quantity++;
+        existingItem.quantity++; // Incrementa a quantidade se o item já existir
     } else {
-        cart.push({ id: productId, name: productName, quantity: 1, price: productPrice });
+        cart.push({ id: productId, name: productName, quantity: 1, price: productPrice }); // Adiciona o novo item
     }
-    cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    cartCount = cart.reduce((total, item) => total + item.quantity, 0); // Recalcula a contagem total
     updateCartIndicator();
-    saveCartToLocalStorage()
+    saveCartToLocalStorage();
 }
 
-// Abre o modal do carrinho
+// Remove um item do carrinho
+function removeFromCart(productId) {
+    const itemIndex = cart.findIndex(item => item.id === productId);
+    if (itemIndex > -1) {
+        cartCount -= cart[itemIndex].quantity; // Deduz a quantidade do item removido
+        cart.splice(itemIndex, 1); // Remove o item do carrinho
+        updateCartIndicator();
+        updateCartModal();
+        saveCartToLocalStorage();
+    }
+}
+
+// Atualiza o estado do botão na página principal
+function updateButtonState(buttonId, quantity) {
+    const buttonWrapper = document.getElementById(buttonId);
+    const button = buttonWrapper.querySelector('.option-button');
+    const counter = buttonWrapper.querySelector('.counter');
+    const quantitySpan = counter.querySelector('.quantity');
+
+    buttonWrapper.quantity = quantity;
+    quantitySpan.textContent = quantity;
+
+    if (quantity === 0) {
+        counter.style.display = 'none';
+        button.style.display = 'block';
+    } else {
+        counter.style.display = 'flex';
+        button.style.display = 'none';
+    }
+    saveButtonStateToLocalStorage(buttonId, quantity);
+}
+
+// =============================================================================
+// EVENT LISTENERS
+// =============================================================================
+
+// Abre o modal do carrinho ao clicar no ícone do carrinho
 cartIcon.addEventListener('click', () => {
-    loadCartFromLocalStorage()
     updateCartModal();
     cartModal.style.display = 'flex';
-    setTimeout(() => {
-        cartModal.style.opacity = 1; // Adiciona a transição de opacidade
-    }, 10);
+    setTimeout(() => cartModal.style.opacity = 1, 10);
 });
 
-// Fecha o modal do carrinho
+// Fecha o modal do carrinho ao clicar no botão de fechar
 closeModalButton.addEventListener('click', () => {
-    cartModal.style.opacity = 0;// Adiciona a transição de opacidade
-    setTimeout(() => {
-        cartModal.style.display = 'none';
-    }, 500); // Tempo da transição
+    cartModal.style.opacity = 0;
+    setTimeout(() => cartModal.style.display = 'none', 500);
 });
 
-// Fecha o modal se clicar fora do conteúdo
+// Fecha o modal ao clicar fora do conteúdo
 window.addEventListener('click', (event) => {
     if (event.target === cartModal) {
         cartModal.style.opacity = 0;
-        setTimeout(() => {
-            cartModal.style.display = 'none';
-        }, 500); // Tempo da transição
+        setTimeout(() => cartModal.style.display = 'none', 500);
     }
 });
 
-// Função genérica para os botões
+// Configuração dos botões de adicionar e remover itens
 function setupButton(buttonId) {
     const buttonWrapper = document.getElementById(buttonId);
-    buttonWrapper.quantity = 0; // Inicializa a variável quantity do botão
+    buttonWrapper.quantity = 0;
     const button = buttonWrapper.querySelector('.option-button');
     const counter = buttonWrapper.querySelector('.counter');
     const quantitySpan = counter.querySelector('.quantity');
     const plusButton = counter.querySelector('.plus');
     const minusButton = counter.querySelector('.minus');
     const productPrice = parseFloat(buttonWrapper.closest('.option-card').dataset.productPrice);
-
-    // Obtém o nome do produto do atributo data-product-name
     const productName = buttonWrapper.closest('.option-card').dataset.productName;
-    // Gera um ID único para cada tipo de produto
     const productId = buttonId;
 
     // Carrega o estado do botão do localStorage, se existir
     const savedQuantity = loadButtonStateFromLocalStorage(productId);
-    if (savedQuantity > 0) {
-        buttonWrapper.quantity = savedQuantity;
-        quantitySpan.textContent = savedQuantity;
-        counter.style.display = 'flex';
-        button.style.display = 'none';
-    }
+    updateButtonState(productId, savedQuantity);
 
+    // Botão "Comprar"
     button.addEventListener('click', function () {
-        buttonWrapper.quantity++;
-        quantitySpan.textContent = buttonWrapper.quantity;
-        counter.style.display = 'flex';
-        button.style.display = 'none';
-
         addToCart(productName, productId, productPrice);
-        saveButtonStateToLocalStorage(productId, buttonWrapper.quantity);
+        updateButtonState(productId, 1);
     });
 
+    // Botão "+"
     plusButton.addEventListener('click', function () {
-        buttonWrapper.quantity++;
-        quantitySpan.textContent = buttonWrapper.quantity;
         addToCart(productName, productId, productPrice);
-        saveButtonStateToLocalStorage(productId, buttonWrapper.quantity);
+        updateButtonState(productId, buttonWrapper.quantity + 1);
     });
 
+    // Botão "-"
     minusButton.addEventListener('click', function () {
-        buttonWrapper.quantity--;
-        if (buttonWrapper.quantity < 0) buttonWrapper.quantity = 0;
-
-        // Atualiza o carrinho e o localStorage se a quantidade for maior que zero
         const itemToRemove = cart.find(item => item.id === productId);
+
         if (itemToRemove) {
             if (itemToRemove.quantity > 1) {
                 itemToRemove.quantity--;
+                cartCount--;
+                updateCartIndicator();
+                updateCartModal();
+                saveCartToLocalStorage();
             } else {
-                // Remove o item do carrinho
-                cartCount -= itemToRemove.quantity;
-                cart = cart.filter(item => item.id !== productId);
+                removeFromCart(productId);
             }
-            updateCartIndicator();
-            updateCartModal();
-            saveCartToLocalStorage();
         }
 
-        quantitySpan.textContent = buttonWrapper.quantity;
-        if (buttonWrapper.quantity === 0) {
-            counter.style.display = 'none';
-            button.style.display = 'block';
-        }
+        let newQuantity = buttonWrapper.quantity - 1;
+        if (newQuantity < 0) newQuantity = 0;
 
-        saveButtonStateToLocalStorage(productId, buttonWrapper.quantity);
+        updateButtonState(productId, newQuantity);
     });
 }
 
-// Configura os botões
+// Configura os botões de cada produto
 setupButton('buy-full-gas');
 setupButton('exchange-gas');
 setupButton('buy-full-water');
@@ -216,11 +218,7 @@ function validateForm() {
     const houseNumber = houseNumberInput.value;
     const cep = cepInput.value;
 
-    if (cart.length > 0 && neighborhood && street && houseNumber && cep) {
-        checkoutButton.disabled = false;
-    } else {
-        checkoutButton.disabled = true;
-    }
+    checkoutButton.disabled = !(cart.length > 0 && neighborhood && street && houseNumber && cep);
 }
 
 // Adiciona event listeners para validar o formulário
@@ -232,10 +230,10 @@ cepInput.addEventListener('input', validateForm);
 // Atualiza o total quando o bairro é selecionado
 neighborhoodSelect.addEventListener('change', () => {
     updateCartModal();
-    validateForm(); // Valida o formulário quando o bairro é selecionado
+    validateForm();
 });
 
-// Função para gerar a mensagem do WhatsApp e abrir a API
+// Gera a mensagem do WhatsApp e abre a API
 function generateWhatsAppMessage() {
     const neighborhood = neighborhoodSelect.value;
     const street = streetInput.value;
@@ -254,19 +252,13 @@ function generateWhatsAppMessage() {
 
     message += `\nTaxa de Entrega: R$ ${deliveryFee.toFixed(2)}`;
     message += `\nTotal: R$ ${cartTotalValue.textContent}\n`;
-
-    message += `\nEndereço de Entrega:\n`;
-    message += `Bairro: ${neighborhood}\n`;
-    message += `Rua: ${street}\n`;
-    message += `Número: ${houseNumber}\n`;
-    message += `CEP: ${cep}\n`;
+    message += `\nEndereço de Entrega:\nBairro: ${neighborhood}\nRua: ${street}\nNúmero: ${houseNumber}\nCEP: ${cep}\n`;
 
     if (observation) {
         message += `\nObservação: ${observation}\n`;
     }
 
-    // Substitua o número abaixo pelo seu número de WhatsApp
-    const whatsappNumber = '556198497382'; // Exemplo de número
+    const whatsappNumber = '556198497382'; // Substitua pelo seu número
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank');
@@ -275,29 +267,45 @@ function generateWhatsAppMessage() {
 // Event listener para o botão de finalizar pedido
 checkoutButton.addEventListener('click', () => {
     generateWhatsAppMessage();
-    saveAddressToLocalStorage()
+    saveAddressToLocalStorage();
+    //saveCartToLocalStorage();
+    // Reseta o estado dos botões para a quantidade inicial (0)
+    //for (let i = 0; i < cart.length; i++) {
+      //  updateButtonState(cart[i].id, 0);
+    //}
+
+    // Limpa o carrinho
+    //cart = [];
+    //cartCount = 0;
+
+    // Atualiza o modal e o indicador do carrinho
+    //updateCartIndicator();
+    //updateCartModal();
 });
 
-// Função para salvar o carrinho no localStorage
+// =============================================================================
+// FUNÇÕES DE LOCALSTORAGE
+// =============================================================================
+
+// Salva o carrinho no localStorage
 function saveCartToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('cartCount', cartCount.toString());
 }
 
-// Função para carregar o carrinho do localStorage
+// Carrega o carrinho do localStorage
 function loadCartFromLocalStorage() {
     const savedCart = localStorage.getItem('cart');
     const savedCartCount = localStorage.getItem('cartCount');
 
     if (savedCart) {
         cart = JSON.parse(savedCart);
-        cartCount = parseInt(savedCartCount) || 0; // Garante que cartCount seja um número
+        cartCount = parseInt(savedCartCount) || 0;
         updateCartIndicator();
-        updateCartModal();
     }
 }
 
-// Função para salvar o endereço no localStorage
+// Salva o endereço no localStorage
 function saveAddressToLocalStorage() {
     const address = {
         neighborhood: neighborhoodSelect.value,
@@ -306,14 +314,12 @@ function saveAddressToLocalStorage() {
         cep: cepInput.value,
         observation: observationInput.value
     };
-
     localStorage.setItem('address', JSON.stringify(address));
 }
 
-// Função para carregar o endereço do localStorage
+// Carrega o endereço do localStorage
 function loadAddressFromLocalStorage() {
     const savedAddress = localStorage.getItem('address');
-
     if (savedAddress) {
         const address = JSON.parse(savedAddress);
         neighborhoodSelect.value = address.neighborhood;
@@ -324,20 +330,28 @@ function loadAddressFromLocalStorage() {
     }
 }
 
-// Função para salvar o estado do botão no localStorage
+// Salva o estado do botão no localStorage
 function saveButtonStateToLocalStorage(buttonId, quantity) {
     localStorage.setItem(`buttonState_${buttonId}`, quantity.toString());
 }
 
-// Função para carregar o estado do botão do localStorage
+// Carrega o estado do botão do localStorage
 function loadButtonStateFromLocalStorage(buttonId) {
     const savedQuantity = localStorage.getItem(`buttonState_${buttonId}`);
     return savedQuantity ? parseInt(savedQuantity) : 0;
 }
 
-// Carrega o carrinho e o endereço do localStorage ao carregar a página
+// =============================================================================
+// INICIALIZAÇÃO
+// =============================================================================
+
+// Carrega o carrinho, o endereço e os estados dos botões do localStorage ao carregar a página
 window.addEventListener('load', () => {
     loadCartFromLocalStorage();
     loadAddressFromLocalStorage();
-    validateForm(); // Valida o formulário ao carregar a página
+    setupButton('buy-full-gas');
+    setupButton('exchange-gas');
+    setupButton('buy-full-water');
+    setupButton('exchange-water');
+    validateForm();
 });
