@@ -7,41 +7,23 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <div class="cart-indicator" id="cart-indicator">
-        <i class="cart-icon">🛒</i>
-        <span id="cart-count">0</span> ite<span id="plural-s">ns</span>
-    </div>
-
-    <div class="cart-modal" id="cart-modal">
-        <div class="cart-modal-content">
-            <span class="close-modal" id="close-modal">&times;</span>
-            <h2>Carrinho Resumo</h2>
-            <ul id="cart-items">
-                </ul>
-
-            <div class="address-form">
-                <h3>Endereço de Entrega</h3>
-                <select id="neighborhood" required>
-                    <option value="" disabled selected>Selecione o Bairro</option>
-                    <option value="Residencial Oeste" data-fee="8.00">Residencial Oeste - R$ 8,00</option>
-                    <option value="Morro Azul" data-fee="6.00">Morro Azul - R$ 6,00</option>
-                    <option value="Bonsucesso" data-fee="8.00">Bonsucesso - R$ 8,00</option>
-                    <option value="Vila Nova" data-fee="8.00">Vila Nova - R$ 8,00</option>
-                    <option value="São José" data-fee="8.00">São José - R$ 8,00</option>
-                    <option value="Vila do Boa" data-fee="7.00">Vila do Boa - R$ 7,00</option>
-                </select>
-                <input type="text" id="street" placeholder="Rua" required>
-                <input type="text" id="house-number" placeholder="Número da Casa" required>
-                <input type="text" id="cep" placeholder="CEP" required>
-                <textarea id="observation" placeholder="Observação (opcional)"></textarea>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Gás e Água Rápido</h1>
             </div>
-
-            <div class="cart-total">
-                Total: R$ <span id="cart-total-value">0.00</span>
+            <ul class="nav-links">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Serviços</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+            <div class="cart-indicator" id="cart-indicator">
+                <i class="cart-icon">🛒</i>
+                <span id="cart-count">0</span> ite<span id="plural-s">ns</span>
             </div>
-            <button id="checkout-button" disabled>Finalizar Pedido</button>
-        </div>
-    </div>
+        </nav>
+    </header>
 
     <section class="order-section">
         <div class="container">
@@ -50,48 +32,48 @@
                 <h2 class="section-subtitle">Gás</h2>
                 
                 <div class="gas-options">
-                <div class="option-card" data-product-name="Botijão Cheio" data-product-price="90.00">
-                    <img src="assets/botijao.png" alt="Botijão Vazio" class="product-icon">
-                    <h2 class="option-title">Comprar Botijão Cheio</h2>
-                    <p class="option-description">Precisa de um botijão novo?</p>
-                    <div class="product-info">
-                        <span class="info-label">Preço:</span>
-                        <span class="info-value price">R$ 90,00</span>
-                        <span class="info-label">Peso:</span>
-                        <span class="info-value">13 kg</span>
-                        <span class="info-label">Gás:</span>
-                        <span class="info-value">GLP</span>
-                    </div>
-                    <div class="button-wrapper" id="buy-full-gas">
-                        <button class="option-button">Comprar</button>
-                        <div class="counter">
-                            <button class="counter-button minus">-</button>
-                            <span class="quantity">0</span>
-                            <button class="counter-button plus">+</button>
+                    <div class="option-card" data-product-name="Botijão Cheio" data-product-price="90.00">
+                        <img src="assets/botijao.png" alt="Botijão" class="product-icon">
+                        <h2 class="option-title">Comprar Botijão Cheio</h2>
+                        <p class="option-description">Precisa de um botijão novo?</p>
+                        <div class="product-info">
+                            <span class="info-label">Preço:</span>
+                            <span class="info-value price">R$ 90,00</span>
+                            <span class="info-label">Peso:</span>
+                            <span class="info-value">13 kg</span>
+                            <span class="info-label">Gás:</span>
+                            <span class="info-value">GLP</span>
+                        </div>
+                        <div class="button-wrapper" id="buy-full-gas">
+                            <button class="option-button">Comprar</button>
+                            <div class="counter">
+                                <button class="counter-button minus">-</button>
+                                <span class="quantity">0</span>
+                                <button class="counter-button plus">+</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="option-card" data-product-name="Troca de Botijão" data-product-price="80.00">
-                    <img src="assets/botijao-retornavel.png" alt="Troca de Botijão" class="product-icon">
-                    <h2 class="option-title">Trocar Botijão Vazio</h2>
-                    <p class="option-description">Já tem um botijão vazio para troca?</p>
-                    <div class="product-info">
-                        <span class="info-label">Preço:</span>
-                        <span class="info-value price">R$ 80,00</span>
-                        <span class="info-label">Peso:</span>
-                        <span class="info-value">--</span>
-                        <span class="info-label">Gás:</span>
-                        <span class="info-value">GLP</span>
-                    </div>
-                    <div class="button-wrapper" id="exchange-gas">
-                        <button class="option-button">Trocar</button>
-                        <div class="counter">
-                            <button class="counter-button minus">-</button>
-                            <span class="quantity">0</span>
-                            <button class="counter-button plus">+</button>
+                    <div class="option-card" data-product-name="Troca de Botijão" data-product-price="80.00">
+                        <img src="assets/botijao-retornavel.png" alt="Troca de Botijão" class="product-icon">
+                        <h2 class="option-title">Trocar Botijão</h2>
+                        <p class="option-description">Já tem um botijão para troca?</p>
+                        <div class="product-info">
+                            <span class="info-label">Preço:</span>
+                            <span class="info-value price">R$ 80,00</span>
+                            <span class="info-label">Peso:</span>
+                            <span class="info-value">--</span>
+                            <span class="info-label">Gás:</span>
+                            <span class="info-value">GLP</span>
+                        </div>
+                        <div class="button-wrapper" id="exchange-gas">
+                            <button class="option-button">Trocar</button>
+                            <div class="counter">
+                                <button class="counter-button minus">-</button>
+                                <span class="quantity">0</span>
+                                <button class="counter-button plus">+</button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <h2 class="section-subtitle">Água</h2>
 
@@ -119,8 +101,8 @@
                     </div>
                     <div class="option-card" data-product-name="Troca de Galão de Água" data-product-price="15.00">
                         <img src="assets/galao-retornavel.png" alt="Troca de Galão de Água" class="product-icon">
-                        <h2 class="option-title">Trocar Galão de Água Vazio</h2>
-                        <p class="option-description">Já tem um galão vazio para troca?</p>
+                        <h2 class="option-title">Trocar Galão de Água</h2>
+                        <p class="option-description">Já tem um galão para troca?</p>
                         <div class="product-info">
                             <span class="info-label">Preço:</span>
                             <span class="info-value price">R$ 15,00</span>
@@ -142,6 +124,84 @@
             </div>
         </div>
     </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>Sobre Nós</h2>
+                <p>SUA EMPRESA é uma empresa dedicada a fornecer produtos de qualidade com entrega rápida e eficiente.</p>
+            </div>
+            <div class="footer-section links">
+                <h2>Links Rápidos</h2>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Serviços</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h2>Contato</h2>
+                <p>Email: contato@gaseaguarapido.com</p>
+                <p>Telefone: (XX) XXXX-XXXX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 SUA EMPRESA. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>Carrinho Resumo</h2>
+            <ul id="cart-items">
+            </ul>
+
+            <div class="address-form">
+                <h3>Endereço de Entrega</h3>
+                <select id="neighborhood" required>
+                    <option value="" disabled selected>Selecione o Bairro</option>
+                    <option value="Residencial Oeste" data-fee="8.00">Residencial Oeste - R$ 8,00</option>
+                    <option value="Morro Azul" data-fee="6.00">Morro Azul - R$ 6,00</option>
+                    <option value="Bonsucesso" data-fee="8.00">Bonsucesso - R$ 8,00</option>
+                    <option value="Vila Nova" data-fee="8.00">Vila Nova - R$ 8,00</option>
+                    <option value="São José" data-fee="8.00">São José - R$ 8,00</option>
+                    <option value="Vila do Boa" data-fee="7.00">Vila do Boa - R$ 7,00</option>
+                </select>
+                <input type="text" id="street" placeholder="Rua" required>
+                <input type="text" id="house-number" placeholder="Número da Casa" required>
+                <input type="text" id="cep" placeholder="CEP" required>
+                <textarea id="observation" placeholder="Observação (opcional)"></textarea>
+            </div>
+
+            <div class="payment-options">
+                <h3>Forma de Pagamento</h3>
+                <label>
+                    <input type="radio" name="payment-method" value="Cartão" required> Cartão
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="PIX" required> PIX
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="Dinheiro" required> Dinheiro
+                </label>
+                <div id="change-section" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="no-change"> Não precisa de troco
+                    </label>
+                    <div id="change-input" style="display: none;">
+                        <input type="text" id="change-for" placeholder="Troco para:">
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-total">
+                Total: R$ <span id="cart-total-value">0.00</span>
+            </div>
+            <button id="checkout-button" disabled>Finalizar Pedido</button>
+        </div>
+    </div>
 
     <script src="js/index.js"></script>
 </body>
