@@ -66,7 +66,127 @@ nav {
 .cart-icon {
     font-size: 1.2rem;
 }
+/*article*/
+/* Reset básico */
 
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    width: 100vw;
+    margin: 0 auto;
+    background-color: #fff;
+    
+}
+
+.hero-content {
+    flex: 1 1 50%;
+    padding: 1rem;
+}
+
+.hero-image {
+    flex: 1 1 40%;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.company-name {
+    font-weight: bold;
+    color: #222;
+    font-size: 1.2rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn.whatsapp {
+    background-color: #25d366;
+}
+
+.btn.whatsapp:hover {
+    background-color: #1da851;
+}
+
+.address {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+.opening-hours {
+    font-size: 1rem;
+    color: #444;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+.opening-hours p {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content, .hero-image {
+        flex: 1 1 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
 /* Section - Pedidos */
 .order-section {
     padding: 2rem 0;
@@ -270,6 +390,7 @@ footer {
 }
 
 /* Modal do Carrinho */
+/* Modal do Carrinho */
 .cart-modal {
     display: none;
     position: fixed;
@@ -281,6 +402,7 @@ footer {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow-y: auto; /* Adiciona scroll vertical */
 }
 
 .cart-modal-content {
@@ -288,9 +410,23 @@ footer {
     padding: 2rem;
     border-radius: 10px;
     max-width: 500px;
-    width: 100%;
+    width: 90%; /* Ajusta a largura para dispositivos móveis */
     position: relative;
     animation: slideInDown 0.5s ease-in-out;
+    max-height: 90vh; /* Limita a altura máxima do modal */
+    overflow-y: auto; /* Adiciona scroll vertical ao conteúdo */
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+    .cart-modal-content {
+        padding: 1rem; /* Reduz o padding para dispositivos móveis */
+    }
+
+    .cart-modal {
+        align-items: flex-start; /* Alinha o modal no topo da tela */
+        padding-top: 20px; /* Adiciona um espaço no topo */
+    }
 }
 
 .close-modal {

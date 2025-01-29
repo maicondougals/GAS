@@ -101,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const quantityControl = document.createElement('div');
             quantityControl.className = 'quantity-control';
             quantityControl.innerHTML = `
-                <button class="quantity-button minus" data-product="${item.name}">-</button>
+                <button class="quantity-button minus counter-button" data-product="${item.name}">-</button>
                 <span class="quantity">${item.quantity}</span>
-                <button class="quantity-button plus" data-product="${item.name}">+</button>
+                <button class="quantity-button plus counter-button" data-product="${item.name}">+</button>
             `;
             li.appendChild(quantityControl);
 
