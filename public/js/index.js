@@ -19,25 +19,86 @@ const streetInput = document.getElementById('street');
 const houseNumberInput = document.getElementById('house-number');
 const cepInput = document.getElementById('cep');
 const observationInput = document.getElementById('observation');
+const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+const changeSection = document.getElementById("change-section");
+const changeForInput = document.getElementById("change-for");
+const noChangeCheckbox = document.getElementById("no-change");
 
 // =============================================================================
 // FUNÇÕES AUXILIARES
 // =============================================================================
 
+// Exibe mensagem de erro
+function showError(message) {
+    alert(message);
+}
+
+// Valida o pedido antes de finalizar
+function validateOrder() {
+    if (cart.length === 0) {
+        showError("Seu carrinho está vazio. Adicione pelo menos um produto antes de finalizar o pedido.");
+        return false;
+    }
+
+    // Validação dos campos de endereço
+    if (!neighborhoodSelect.value) {
+        showError("Por favor, selecione um bairro para entrega.");
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.style.opacity = 1, 10);
+        return false;
+    }
+
+    if (!streetInput.value.trim()) {
+        showError("Por favor, preencha o campo 'Rua'.");
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.style.opacity = 1, 10);
+        return false;
+    }
+
+    if (!houseNumberInput.value.trim()) {
+        showError("Por favor, preencha o campo 'Número da Casa'.");
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.style.opacity = 1, 10);
+        return false;
+    }
+
+    if (!cepInput.value.trim()) {
+        showError("Por favor, preencha o campo 'CEP'.");
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.style.opacity = 1, 10);
+        return false;
+    }
+
+    const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
+    if (!selectedPaymentMethod) {
+        showError("Por favor, selecione uma forma de pagamento.");
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.style.opacity = 1, 10);
+        return false;
+    }
+
+    if (selectedPaymentMethod.value === "Dinheiro" && !noChangeCheckbox.checked && !changeForInput.value.trim()) {
+        showError("Por favor, informe para quanto deve ser dado o troco ou marque 'Não precisa de troco'.");
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.style.opacity = 1, 10);
+        return false;
+    }
+
+    return true;
+}
+
 // Atualiza o indicador de quantidade de itens no carrinho
 function updateCartIndicator() {
     cartIndicator.textContent = cartCount;
     pluralS.textContent = cartCount === 1 ? '' : 'ns';
-    validateForm(); // Aproveita para validar o formulário sempre que o carrinho é atualizado
+    validateForm();
 }
 
 // Atualiza o conteúdo do modal do carrinho
 function updateCartModal() {
-    cartItemsList.innerHTML = ''; // Limpa a lista de itens do modal
-
+    cartItemsList.innerHTML = '';
     let total = 0;
 
-    // Itera sobre cada item no carrinho
     cart.forEach(item => {
         const li = document.createElement('li');
         li.classList.add('cart-item');
@@ -54,16 +115,12 @@ function updateCartModal() {
         itemPrice.classList.add('cart-item-price');
         itemPrice.textContent = `R$ ${(item.price * item.quantity).toFixed(2)}`;
 
-        // Botão para remover o item do carrinho
         const removeButton = document.createElement('button');
         removeButton.classList.add('remove-item');
         removeButton.textContent = 'Remover';
         removeButton.addEventListener('click', () => {
-            removeFromCart(item.id); // Remove o item pelo ID
-
-            // Atualiza o botão correspondente na página principal
-            const buttonWrapper = document.getElementById(item.id);
-            updateButtonState(item.id, 0); // Reseta o estado do botão
+            removeFromCart(item.id);
+            updateButtonState(item.id, 0); // Atualiza o estado do botão para 0
         });
 
         li.appendChild(itemName);
@@ -75,24 +132,24 @@ function updateCartModal() {
         total += item.price * item.quantity;
     });
 
-    // Adiciona a taxa de entrega ao total, se houver
     const selectedNeighborhood = neighborhoodSelect.options[neighborhoodSelect.selectedIndex];
     const deliveryFee = selectedNeighborhood ? parseFloat(selectedNeighborhood.dataset.fee) : 0;
     total += deliveryFee;
 
-    cartTotalValue.textContent = total.toFixed(2); // Atualiza o valor total
+    cartTotalValue.textContent = total.toFixed(2);
 }
 
-// Adiciona um item ao carrinho
+// Adiciona um item ao carrinho (sempre um por vez)
 function addToCart(productName, productId, productPrice) {
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) {
-        existingItem.quantity++; // Incrementa a quantidade se o item já existir
+        existingItem.quantity += 1; // Incrementa a quantidade em 1
     } else {
-        cart.push({ id: productId, name: productName, quantity: 1, price: productPrice }); // Adiciona o novo item
+        cart.push({ id: productId, name: productName, quantity: 1, price: productPrice });
     }
-    cartCount = cart.reduce((total, item) => total + item.quantity, 0); // Recalcula a contagem total
+    cartCount++;
     updateCartIndicator();
+    updateCartModal();
     saveCartToLocalStorage();
 }
 
@@ -100,8 +157,8 @@ function addToCart(productName, productId, productPrice) {
 function removeFromCart(productId) {
     const itemIndex = cart.findIndex(item => item.id === productId);
     if (itemIndex > -1) {
-        cartCount -= cart[itemIndex].quantity; // Deduz a quantidade do item removido
-        cart.splice(itemIndex, 1); // Remove o item do carrinho
+        cartCount -= cart[itemIndex].quantity; // Remove a quantidade total do item
+        cart.splice(itemIndex, 1);
         updateCartIndicator();
         updateCartModal();
         saveCartToLocalStorage();
@@ -132,20 +189,45 @@ function updateButtonState(buttonId, quantity) {
 // EVENT LISTENERS
 // =============================================================================
 
-// Abre o modal do carrinho ao clicar no ícone do carrinho
+// Configuração dos botões de pagamento
+paymentMethods.forEach((method) => {
+    method.addEventListener("change", function () {
+        if (this.value === "Dinheiro") {
+            changeSection.style.display = "block";
+            changeForInput.style.display = "block";
+            if (!noChangeCheckbox.checked) {
+                changeForInput.focus();
+            }
+        } else {
+            changeSection.style.display = "none";
+            changeForInput.value = "";
+            noChangeCheckbox.checked = false;
+        }
+    });
+});
+
+// Controle do checkbox de troco
+noChangeCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+        changeForInput.style.display = "none";
+        changeForInput.value = "";
+    } else {
+        changeForInput.style.display = "block";
+        changeForInput.focus();
+    }
+});
+
 cartIcon.addEventListener('click', () => {
     updateCartModal();
     cartModal.style.display = 'flex';
     setTimeout(() => cartModal.style.opacity = 1, 10);
 });
 
-// Fecha o modal do carrinho ao clicar no botão de fechar
 closeModalButton.addEventListener('click', () => {
     cartModal.style.opacity = 0;
     setTimeout(() => cartModal.style.display = 'none', 500);
 });
 
-// Fecha o modal ao clicar fora do conteúdo
 window.addEventListener('click', (event) => {
     if (event.target === cartModal) {
         cartModal.style.opacity = 0;
@@ -166,23 +248,19 @@ function setupButton(buttonId) {
     const productName = buttonWrapper.closest('.option-card').dataset.productName;
     const productId = buttonId;
 
-    // Carrega o estado do botão do localStorage, se existir
     const savedQuantity = loadButtonStateFromLocalStorage(productId);
     updateButtonState(productId, savedQuantity);
 
-    // Botão "Comprar"
     button.addEventListener('click', function () {
         addToCart(productName, productId, productPrice);
-        updateButtonState(productId, 1);
+        updateButtonState(productId, buttonWrapper.quantity + 1);
     });
 
-    // Botão "+"
     plusButton.addEventListener('click', function () {
         addToCart(productName, productId, productPrice);
         updateButtonState(productId, buttonWrapper.quantity + 1);
     });
 
-    // Botão "-"
     minusButton.addEventListener('click', function () {
         const itemToRemove = cart.find(item => item.id === productId);
 
@@ -221,13 +299,11 @@ function validateForm() {
     checkoutButton.disabled = !(cart.length > 0 && neighborhood && street && houseNumber && cep);
 }
 
-// Adiciona event listeners para validar o formulário
 neighborhoodSelect.addEventListener('change', validateForm);
 streetInput.addEventListener('input', validateForm);
 houseNumberInput.addEventListener('input', validateForm);
 cepInput.addEventListener('input', validateForm);
 
-// Atualiza o total quando o bairro é selecionado
 neighborhoodSelect.addEventListener('change', () => {
     updateCartModal();
     validateForm();
@@ -240,6 +316,9 @@ function generateWhatsAppMessage() {
     const houseNumber = houseNumberInput.value;
     const cep = cepInput.value;
     const observation = observationInput.value;
+    const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
+    const changeInfo = selectedPaymentMethod && selectedPaymentMethod.value === "Dinheiro" ? 
+        (noChangeCheckbox.checked ? "Não precisa de troco" : `Troco para: R$ ${changeForInput.value}`) : "";
 
     let message = `Olá, gostaria de fazer um pedido:\n\n`;
 
@@ -253,12 +332,17 @@ function generateWhatsAppMessage() {
     message += `\nTaxa de Entrega: R$ ${deliveryFee.toFixed(2)}`;
     message += `\nTotal: R$ ${cartTotalValue.textContent}\n`;
     message += `\nEndereço de Entrega:\nBairro: ${neighborhood}\nRua: ${street}\nNúmero: ${houseNumber}\nCEP: ${cep}\n`;
+    message += `\nForma de Pagamento: ${selectedPaymentMethod.value}`;
+    
+    if (changeInfo) {
+        message += `\n${changeInfo}`;
+    }
 
     if (observation) {
         message += `\nObservação: ${observation}\n`;
     }
 
-    const whatsappNumber = '556198497382'; // Substitua pelo seu número
+    const whatsappNumber = '556198497382';
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank');
@@ -266,46 +350,32 @@ function generateWhatsAppMessage() {
 
 // Event listener para o botão de finalizar pedido
 checkoutButton.addEventListener('click', () => {
-    generateWhatsAppMessage();
-    saveAddressToLocalStorage();
-    //saveCartToLocalStorage();
-    // Reseta o estado dos botões para a quantidade inicial (0)
-    //for (let i = 0; i < cart.length; i++) {
-      //  updateButtonState(cart[i].id, 0);
-    //}
-
-    // Limpa o carrinho
-    //cart = [];
-    //cartCount = 0;
-
-    // Atualiza o modal e o indicador do carrinho
-    //updateCartIndicator();
-    //updateCartModal();
+    if (validateOrder()) {
+        generateWhatsAppMessage();
+        saveAddressToLocalStorage();
+    }
 });
 
 // =============================================================================
 // FUNÇÕES DE LOCALSTORAGE
 // =============================================================================
 
-// Salva o carrinho no localStorage
 function saveCartToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('cartCount', cartCount.toString());
 }
 
-// Carrega o carrinho do localStorage
 function loadCartFromLocalStorage() {
     const savedCart = localStorage.getItem('cart');
     const savedCartCount = localStorage.getItem('cartCount');
 
     if (savedCart) {
-        cart = JSON.parse(savedCart);
+        cart.push(...JSON.parse(savedCart));
         cartCount = parseInt(savedCartCount) || 0;
         updateCartIndicator();
     }
 }
 
-// Salva o endereço no localStorage
 function saveAddressToLocalStorage() {
     const address = {
         neighborhood: neighborhoodSelect.value,
@@ -317,7 +387,6 @@ function saveAddressToLocalStorage() {
     localStorage.setItem('address', JSON.stringify(address));
 }
 
-// Carrega o endereço do localStorage
 function loadAddressFromLocalStorage() {
     const savedAddress = localStorage.getItem('address');
     if (savedAddress) {
@@ -330,12 +399,10 @@ function loadAddressFromLocalStorage() {
     }
 }
 
-// Salva o estado do botão no localStorage
 function saveButtonStateToLocalStorage(buttonId, quantity) {
     localStorage.setItem(`buttonState_${buttonId}`, quantity.toString());
 }
 
-// Carrega o estado do botão do localStorage
 function loadButtonStateFromLocalStorage(buttonId) {
     const savedQuantity = localStorage.getItem(`buttonState_${buttonId}`);
     return savedQuantity ? parseInt(savedQuantity) : 0;
@@ -355,5 +422,3 @@ window.addEventListener('load', () => {
     setupButton('exchange-water');
     validateForm();
 });
-
-
