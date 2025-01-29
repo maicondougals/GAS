@@ -45,7 +45,6 @@
                             <span class="info-value">GLP</span>
                         </div>
                         <div class="button-wrapper" id="buy-full-gas">
-                            <button class="option-button">Comprar</button>
                             <div class="counter">
                                 <button class="counter-button minus">-</button>
                                 <span class="quantity">0</span>
@@ -65,8 +64,7 @@
                             <span class="info-label">Gás:</span>
                             <span class="info-value">GLP</span>
                         </div>
-                        <div class="button-wrapper" id="exchange-gas">
-                            <button class="option-button">Trocar</button>
+                        <div class="button-wrapper" id="buy-full-gas">
                             <div class="counter">
                                 <button class="counter-button minus">-</button>
                                 <span class="quantity">0</span>
@@ -90,8 +88,7 @@
                             <span class="info-label">Tipo:</span>
                             <span class="info-value">Mineral</span>
                         </div>
-                        <div class="button-wrapper" id="buy-full-water">
-                            <button class="option-button">Comprar</button>
+                        <div class="button-wrapper" id="buy-full-gas">
                             <div class="counter">
                                 <button class="counter-button minus">-</button>
                                 <span class="quantity">0</span>
@@ -111,8 +108,7 @@
                             <span class="info-label">Tipo:</span>
                             <span class="info-value">Mineral</span>
                         </div>
-                        <div class="button-wrapper" id="exchange-water">
-                            <button class="option-button">Trocar</button>
+                        <div class="button-wrapper" id="buy-full-gas">
                             <div class="counter">
                                 <button class="counter-button minus">-</button>
                                 <span class="quantity">0</span>
@@ -187,19 +183,23 @@
                     <input type="radio" name="payment-method" value="Dinheiro" required> Dinheiro
                 </label>
                 <div id="change-section" style="display: none;">
+                    <div class="change-input">
+                        <label>
+                            Troco para quanto:
+                            <input type="number" id="change-for" placeholder="Ex: 100" min="0" step="0.01">
+                        </label>
+                    </div>
                     <label>
                         <input type="checkbox" id="no-change"> Não precisa de troco
                     </label>
-                    <div id="change-input" style="display: none;">
-                        <input type="text" id="change-for" placeholder="Troco para:">
-                    </div>
                 </div>
             </div>
 
             <div class="cart-total">
                 Total: R$ <span id="cart-total-value">0.00</span>
             </div>
-            <button id="checkout-button" disabled>Finalizar Pedido</button>
+            <button id="checkout-button" >Finalizar Pedido</button>
+      
         </div>
     </div>
 
