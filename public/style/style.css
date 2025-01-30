@@ -26,7 +26,48 @@ header {
     width: 100%; /* Ocupa 100% da largura da tela */
     z-index: 1000; /* Garante que o header fique acima de outros elementos */
 }
+/* Estilos do Botão Hambúrguer */
+.hamburger {
+    display: none; /* Oculta o botão hambúrguer em telas maiores */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
 
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Exibe o botão hambúrguer em telas menores */
+    }
+
+    .nav-links {
+        display: none; /* Oculta os links de navegação em telas menores */
+        flex-direction: column;
+        background-color: #2c3e50;
+        position: absolute;
+        top: 60px; /* Ajuste conforme a altura do header */
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex; /* Exibe os links quando o menu está ativo */
+    }
+
+    .nav-links li {
+        text-align: center;
+        margin: 0.5rem 0;
+    }
+}
 nav {
     display: flex;
     justify-content: space-between;
@@ -86,7 +127,7 @@ nav {
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    background-image: url('/public/assets/background.png');
+    background-image: url('/assets/background.png');
     background-position: right;
     background-repeat: no-repeat;
     border-radius: 0 0 24px 24px;

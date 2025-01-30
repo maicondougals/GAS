@@ -12,15 +12,23 @@
             <div class="logo">
                 <img src="assets/mascote.png" width="100px" height="100px" alt="">
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#pedir">Fazer pedido</a></li>
+            <!-- Botão Hambúrguer -->
+            <div class="hamburger" id="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <!-- Links de Navegação -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre Nós</a></li>
                 <li><a href="#">Serviços</a></li>
                 <li><a href="#">Contato</a></li>
             </ul>
+            <!-- Ícone do Carrinho -->
             <div class="cart-indicator" id="cart-indicator">
                 <i class="cart-icon">🛒</i>
-                <span id="cart-count">0</span> ite<span id="plural-s">ns</span>
+                <span id="cart-count">0</span>Carrinho</span>
             </div>
         </nav>
     </header>
@@ -142,7 +150,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="">
 
     </section>
 
@@ -229,5 +237,6 @@
     </div>
 
     <script src="js/index.js"></script>
+    <script src="js/hamburger.js"></script>
 </body>
 </html>

@@ -25,11 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }).format(value);
     }
 
+    // Função para calcular o total do pedido (produtos + taxa de entrega)
+    function calculateTotal() {
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const deliveryFee = parseFloat(neighborhoodSelect.options[neighborhoodSelect.selectedIndex].getAttribute('data-fee')) || 0;
+        return subtotal + deliveryFee;
+    }
+
     // Função para atualizar o ícone do carrinho
     function updateCartIndicator() {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartCount.textContent = totalItems;
-        document.getElementById('plural-s').textContent = totalItems === 1 ? 'm' : 'ns';
     }
 
     // Função para adicionar item ao carrinho
@@ -86,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para renderizar os itens do carrinho no modal
     function renderCartItems() {
         cartItemsList.innerHTML = '';
-        let total = 0;
+        let subtotal = 0;
         cart.forEach(item => {
             const li = document.createElement('li');
             li.className = 'cart-item';
@@ -115,13 +121,20 @@ document.addEventListener('DOMContentLoaded', function () {
             li.appendChild(removeButton);
 
             cartItemsList.appendChild(li);
-            total += item.price * item.quantity;
+            subtotal += item.price * item.quantity;
         });
 
-        // Atualiza o total do carrinho
+        // Atualiza o total do pedido (subtotal + taxa de entrega)
+        const total = calculateTotal();
         cartTotalValue.textContent = total.toFixed(2);
 
-        // Adiciona eventos aos botões de quantidade e remoção no carrinho
+        // Reatribui os event listeners aos botões "+", "-" e "Remover"
+        attachCartItemEventListeners();
+    }
+
+    // Função para reatribuir os event listeners aos botões do carrinho
+    function attachCartItemEventListeners() {
+        // Event listeners para os botões de quantidade no carrinho
         document.querySelectorAll('.quantity-button').forEach(button => {
             button.addEventListener('click', function () {
                 const productName = this.getAttribute('data-product');
@@ -134,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Adiciona eventos aos botões de remoção
+        // Event listeners para os botões de remoção no carrinho
         document.querySelectorAll('.remove-button').forEach(button => {
             button.addEventListener('click', function () {
                 const productName = this.getAttribute('data-product');
@@ -234,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (Array.from(paymentMethods).find(method => method.checked).value === 'Dinheiro' && !noChangeCheckbox.checked) {
             summary += `Troco para: ${formatCurrency(parseFloat(changeForInput.value))}\n`;
         }
-        summary += `\nTotal: R$ ${cartTotalValue.textContent}`;
+        summary += `\nTotal: R$ ${calculateTotal().toFixed(2)}`; // Atualiza o total com a taxa de entrega
         return summary;
     }
 
@@ -270,5 +283,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isNaN(value)) {
             this.value = '';
         }
+    });
+
+    // Event listener para atualizar o total do pedido ao selecionar um bairro
+    neighborhoodSelect.addEventListener('change', function () {
+        renderCartItems(); // Re-renderiza os itens do carrinho para atualizar o total
     });
 });
