@@ -10,14 +10,21 @@ body {
     line-height: 1.6;
     background-color: #f9f9f9;
     color: #333;
+    padding-top: 70px;
 }
 
 /* Header */
+/* Header */
 header {
-    background-color: #2c3e50;
+    background-color: #004aad;
     color: #fff;
-    padding: 1rem 0;
+    padding: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fixa o header no topo da tela */
+    top: 0; /* Alinha o header no topo */
+    left: 0; /* Alinha o header à esquerda */
+    width: 100%; /* Ocupa 100% da largura da tela */
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
 }
 
 nav {
@@ -66,6 +73,8 @@ nav {
 .cart-icon {
     font-size: 1.2rem;
 }
+
+
 /*article*/
 /* Reset básico */
 
@@ -75,9 +84,12 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 2rem;
-    width: 100vw;
+    max-width: 1200px;
     margin: 0 auto;
-    background-color: #fff;
+    background-image: url('/public/assets/background.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    border-radius: 0 0 24px 24px;
     
 }
 
@@ -100,25 +112,25 @@ nav {
 h1 {
     font-family: 'Roboto', sans-serif;
     font-size: 2.5rem;
-    color: #333;
+    color: whitesmoke;
     margin-bottom: 1rem;
 }
 
 h2 {
     font-size: 1.8rem;
-    color: #555;
+    color: whitesmoke;
     margin-bottom: 1rem;
 }
 
 p {
     font-size: 1.1rem;
-    color: #666;
+    color: whitesmoke;
     margin-bottom: 1.5rem;
 }
 
 .company-name {
     font-weight: bold;
-    color: #222;
+    color: whitesmoke;
     font-size: 1.2rem;
 }
 
@@ -153,13 +165,13 @@ p {
 
 .address {
     font-size: 1rem;
-    color: #444;
+    color: white;
     margin-bottom: 1.5rem;
 }
 
 .opening-hours {
     font-size: 1rem;
-    color: #444;
+    color: white;
     border-top: 1px solid #ddd;
     padding-top: 1rem;
 }
@@ -241,7 +253,7 @@ p {
 
 .product-icon {
     width: 100%;
-    max-width: 100px;
+    max-width: 200px;
     display: block;
     margin: 0 auto 1rem;
 }
