@@ -2,16 +2,18 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gás e Água Rápido - Pedido</title>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">
-                <img src="assets/mascote.png" width="100px" height="100px" alt="">
-            </div>
             <!-- Botão Hambúrguer -->
             <div class="hamburger" id="hamburger">
                 <div class="line"></div>
@@ -20,10 +22,10 @@
             </div>
             <!-- Links de Navegação -->
             <ul class="nav-links" id="nav-links">
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Sobre Nós</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#pedir">Pedir Delivery</a></li>
+                <li><a href="#tutorial">Aprenda a instalar o Botijão</a></li>
+                <li><a href="#local">Onde nos encontrar</a></li>
             </ul>
             <!-- Ícone do Carrinho -->
             <div class="cart-indicator" id="cart-indicator">
@@ -40,7 +42,7 @@
             <p>Não se preocupe, estaremos sempre aqui para quando quiser pedir!</p>
             <p class="company-name">SUA EMPRESA Gás e Água</p>
             <div class="buttons">
-                <a href="#pedir" class="btn">Pedir agora mesmo</a>
+                <a href="#pedir" class="btn">Pedido Rápido</a>
                 <a href="#" class="btn whatsapp">Pedir pelo WhatsApp</a>
             </div>
             <p class="address">Endereço: Endereço da sua empresa</p>
@@ -49,21 +51,22 @@
                 <p>Segunda a Sexta: 8:00 - 18:00</p>
             </div>
         </div>
+        <!--
         <div class="hero-image">
-            <img src="assets/mascote.png" alt="Botijão de gás e galão de água">
+            <img src="assets/mascote.png" alt="Botijão de gás e galão de água" loading="lazy">
         </div>
+        -->
     </article>
 
     <section class="order-section" id="pedir">
         <div class="container">
-            <h1 class="main-title">Peça seu Gás ou Água</h1>
+            <h1 class="main-title">Peça e receba em casa</h1>
             <div class="product-options">
-                <h2 class="section-subtitle">Gás</h2>
-                
+                <h2 class="section-subtitle"><hr>Gás</h2>
                 <div class="gas-options">
                     <div class="option-card" data-product-name="Botijão Cheio" data-product-price="90.00">
-                        <img src="assets/botijao.png" alt="Botijão" class="product-icon">
-                        <h2 class="option-title">Comprar Botijão Cheio</h2>
+                        <img src="assets/botijao.png" alt="Botijão" class="product-icon" loading="lazy">
+                        <h2 class="option-title">Comprar Botijão</h2>
                         <p class="option-description">Precisa de um botijão novo?</p>
                         <div class="product-info">
                             <span class="info-label">Preço:</span>
@@ -82,7 +85,7 @@
                         </div>
                     </div>
                     <div class="option-card" data-product-name="Troca de Botijão" data-product-price="80.00">
-                        <img src="assets/botijao-retornavel.png" alt="Troca de Botijão" class="product-icon">
+                        <img src="assets/botijao-retornavel.png" alt="Troca de Botijão" class="product-icon" loading="lazy">
                         <h2 class="option-title">Trocar Botijão</h2>
                         <p class="option-description">Já tem um botijão para troca?</p>
                         <div class="product-info">
@@ -102,12 +105,11 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="section-subtitle">Água</h2>
-
+                <h2 class="section-subtitle"><hr>Água</h2>
                 <div class="water-options">
                     <div class="option-card" data-product-name="Galão de Água Cheio" data-product-price="25.00">
-                        <img src="assets/galao.png" alt="Galão de Água Cheio" class="product-icon">
-                        <h2 class="option-title">Comprar Galão de Água Cheio</h2>
+                        <img src="assets/galao.png" alt="Galão de Água Cheio" class="product-icon" loading="lazy">
+                        <h2 class="option-title">Comprar Galão de Água</h2>
                         <p class="option-description">Precisa de um galão de água novo?</p>
                         <div class="product-info">
                             <span class="info-label">Preço:</span>
@@ -126,7 +128,7 @@
                         </div>
                     </div>
                     <div class="option-card" data-product-name="Troca de Galão de Água" data-product-price="15.00">
-                        <img src="assets/galao-retornavel.png" alt="Troca de Galão de Água" class="product-icon">
+                        <img src="assets/galao-retornavel.png" alt="Troca de Galão de Água" class="product-icon" loading="lazy">
                         <h2 class="option-title">Trocar Galão de Água</h2>
                         <p class="option-description">Já tem um galão para troca?</p>
                         <div class="product-info">
@@ -146,12 +148,58 @@
                         </div>
                     </div>
                 </div>
+                                <!-- Adicione este trecho após a seção de Água -->
+                <h2 class="section-subtitle"><hr>Acessórios</h2>
+                <div class="accessories-options">
+                    <div class="option-card" data-product-name="Kit Regulador + Mangueira" data-product-price="49.99">
+                        <img src="assets/acessorio.jpeg" alt="Kit Regulador + Mangueira" class="product-icon" loading="lazy">
+                        <h2 class="option-title">Kit Regulador + Mangueira</h2>
+                        <p class="option-description">Kit completo para instalação segura do botijão.</p>
+                        <div class="product-info">
+                            <span class="info-label">Preço:</span>
+                            <span class="info-value price">R$ 49,99</span>
+                            <span class="info-label">Compatível com:</span>
+                            <span class="info-value">GLP</span>
+                        </div>
+                        <div class="button-wrapper" id="buy-accessory">
+                            <div class="counter">
+                                <button class="counter-button minus">-</button>
+                                <span class="quantity">0</span>
+                                <button class="counter-button plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="">
+    <section class="tutorial-container" id="tutorial">
+        <h1 class="main-title">Como instalar o Gás de cozinha</h1>
+        <div class="tutorial-div">
+            <img src="assets/1.png" alt="Número 1" loading="lazy">
+            <h3>Verifique os equipamentos e a segurança</h3>
+            <p>Antes de começar, certifique-se de que todos os equipamentos estejam em boas condições. Verifique se o botijão de gás, a mangueira e o regulador de pressão estão sem rachaduras, vazamentos ou danos. Além disso, mantenha o ambiente ventilado e afaste qualquer fonte de ignição, como fósforos ou isqueiros, para evitar acidentes.</p>
+        </div>
+        <div class="tutorial-div">
+            <img src="assets/2.png" alt="Número 2" loading="lazy">
+            <h3>Conecte o regulador ao botijão de gás</h3>
+            <p>Posicione o botijão de gás em um local estável e seguro. Em seguida, rosqueie o regulador de pressão na válvula do botijão, girando no sentido horário. Certifique-se de que a conexão esteja firme, mas sem forçar demais para não danificar a rosca. Após conectar, abra a válvula do botijão lentamente para verificar se não há vazamentos.</p>
+        </div>
+        <div class="tutorial-div">
+            <img src="assets/3.png" alt="Número 3" loading="lazy">
+            <h3>Conecte a mangueira ao fogão</h3>
+            <p>Agora, conecte a mangueira de gás ao regulador e ao fogão. Certifique-se de que as conexões estejam bem apertadas, mas sem exagerar. Use uma solução de água com sabão para testar se há vazamentos: aplique a mistura nas conexões e observe se aparecem bolhas. Se não houver bolhas, está tudo certo!</p>
+        </div>
+        <div class="tutorial-div">
+            <img src="assets/4.png" alt="Número 4" loading="lazy">
+            <h3>Teste o funcionamento</h3>
+            <p>Por fim, acenda o fogão para verificar se o gás está fluindo corretamente. Se as chamas estiverem azuis e estáveis, a instalação foi bem-sucedida. Caso contrário, desligue o gás imediatamente e revise as conexões ou entre em contato com um profissional qualificado.</p>
+        </div>
+    </section>
 
+    <section class="local-container" id="local">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122752.85463917108!2d-47.792744983812064!3d-15.959981635323992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9359f596fc0fff41%3A0x5b2c74fdaa5fea04!2zU8OjbyBTZWJhc3Rpw6NvLCBCcmFzw61saWEgLSBERg!5e0!3m2!1spt-BR!2sbr!4v1738337668157!5m2!1spt-BR!2sbr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
     <footer>
@@ -163,10 +211,10 @@
             <div class="footer-section links">
                 <h2>Links Rápidos</h2>
                 <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Sobre Nós</a></li>
-                    <li><a href="#">Serviços</a></li>
-                    <li><a href="#">Contato</a></li>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#pedir">Pedir Delivery</a></li>
+                    <li><a href="#tutorial">Aprenda a instalar o Botijão</a></li>
+                    <li><a href="#local">Onde nos encontrar</a></li>
                 </ul>
             </div>
             <div class="footer-section contact">
@@ -184,9 +232,7 @@
         <div class="cart-modal-content">
             <span class="close-modal" id="close-modal">&times;</span>
             <h2>Carrinho Resumo</h2>
-            <ul id="cart-items">
-            </ul>
-
+            <ul id="cart-items"></ul>
             <div class="address-form">
                 <h3>Endereço de Entrega</h3>
                 <select id="neighborhood" required>
@@ -203,7 +249,6 @@
                 <input type="text" id="cep" placeholder="CEP" required>
                 <textarea id="observation" placeholder="Observação (opcional)"></textarea>
             </div>
-
             <div class="payment-options">
                 <h3>Forma de Pagamento</h3>
                 <label>
@@ -227,16 +272,19 @@
                     </label>
                 </div>
             </div>
-
             <div class="cart-total">
                 Total: R$ <span id="cart-total-value">0.00</span>
             </div>
-            <button id="checkout-button" >Finalizar Pedido</button>
-      
+            <button id="checkout-button">Finalizar Pedido</button>
         </div>
     </div>
 
-    <script src="js/index.js"></script>
-    <script src="js/hamburger.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="js/index.js" defer></script>
+    <script src="js/hamburger.js" defer></script>
+    <script src="js/gsap.js"></script>
 </body>
 </html>
