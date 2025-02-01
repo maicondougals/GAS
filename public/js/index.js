@@ -113,11 +113,12 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             li.appendChild(quantityControl);
 
-            // Botão para remover o item do carrinho
-            const removeButton = document.createElement('button');
-            removeButton.className = 'remove-button';
-            removeButton.textContent = 'Remover';
-            removeButton.setAttribute('data-product', item.name);
+            // Botão para remover o item do carrinho (usando uma imagem)
+            const removeButton = document.createElement('img');
+            removeButton.src = 'assets/lixeira.png'; // Caminho da imagem
+            removeButton.className = 'remove-button'; // Classe para estilização
+            removeButton.setAttribute('data-product', item.name); // Atributo para identificar o produto
+            removeButton.alt = 'Remover'; // Texto alternativo para acessibilidade
             li.appendChild(removeButton);
 
             cartItemsList.appendChild(li);
@@ -321,3 +322,7 @@ verificarStatusLoja();
 
 // Atualizar o status a cada minuto
 setInterval(verificarStatusLoja, 60000);
+
+
+
+

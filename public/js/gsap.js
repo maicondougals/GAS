@@ -45,7 +45,7 @@ gsap.from(".hero-image img", {
 gsap.registerPlugin(ScrollTrigger);
 
 // Animação para os títulos da seção tutorial
-gsap.utils.toArray(".tutorial-div h3").forEach((title) => {
+gsap.utils.toArray(".tutorial-div h2").forEach((title) => {
     gsap.from(title, {
         opacity: 0,
         y: 50, // Move o título para baixo
@@ -95,14 +95,13 @@ gsap.to(tutorialContainer, {
 
 gsap.to('.woman-container',{
     opacity:1,
-    duration:1,
+    //duration:1,
     y:100,
+    filter: 'blur(0)',
     scrollTrigger: {
         trigger: '.woman-container',
-        start: 'top center',
+        start: 'top 30%',
         end:'top top',
-       
-        
     }
 })
 gsap.to('.woman-container h1',{
@@ -118,3 +117,57 @@ gsap.to('.woman-container h1',{
         
     }
 })
+gsap.to('.sobre-img',{
+    boxShadow:'20px -20px 1px 10px var(--primary-color)',
+    
+    
+    scrollTrigger: {
+        trigger: '.sobre-container',
+        start: 'top center',
+        
+
+       
+        
+    }
+})
+
+
+
+
+//
+//
+//
+// BLUR
+//
+//
+//
+
+gsap.to('.text-container, .sobre-img',{
+    filter:'blur(8px)',
+    y:-100,
+    
+    scrollTrigger: {
+        trigger: '.sobre-container',
+        start: 'bottom 40%',
+        //end:'bottom top',
+        scrub:1
+
+       
+        
+    }
+})
+gsap.to('.woman-container',{
+    borderRadius:0,
+    width:'100vw',
+    
+    scrollTrigger: {
+        trigger: '.woman-container',
+        start: 'bottom center',
+        //end:'bottom top',
+        scrub:1
+
+       
+        
+    }
+})
+
