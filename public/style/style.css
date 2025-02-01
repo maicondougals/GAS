@@ -20,7 +20,7 @@ body {
    ============================================================================= */
 :root {
     --primary-color: #007bff; /* Azul Apple */
-    --secondary-color: #34c759; /* Verde Apple */
+    --secondary-color: #007bff25; /* Verde Apple */
     --text-color: #1d1d1f; /* Preto Apple */
     --background-color: #f9f9f9; /* Fundo claro */
     --accent-color: #ff9500; /* Laranja Apple */
@@ -152,10 +152,11 @@ p {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
     color: #fff;
-    background-color: var(--primary-color);
+    
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    border: 1px solid var(--background-color);
 }
 
 .btn:hover {
@@ -191,23 +192,30 @@ p {
    ORDER SECTION (CARDS DE PRODUTOS)
    ============================================================================= */
    .order-section {
-    padding: 2rem ;
+    padding: 1rem ;
     max-width: 800px;
     
     margin: 0 auto;
 }
 
 .container {
-    padding: 0 20px;
-    background-color:whitesmoke;
+    padding: 20px;
+    background-color:var(--secondary-color);
     border-radius: 24px;
+    
+    margin: 100px auto;
 }
 
 .main-title {
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--text-color);
+    font-weight: bold;
+    background-image: linear-gradient(to bottom, #007bff, var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
 }
 
 .section-subtitle {
@@ -269,10 +277,13 @@ p {
 
 .product-info {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1rem;
     width: 100%;
+    background-color: whitesmoke;
+    padding: 5px 10px;
+    border-radius: 14px;
 }
 
 .info-label {
@@ -326,14 +337,17 @@ p {
     margin-bottom: 100px; /* Espaço entre os itens da seção tutorial */
 }
 .tutorial-container {
-    width: 100vw;
+    width: 95vw;
+    margin: 0 auto;
     height: auto;
-    background-image: linear-gradient(to top, #051937, #042f64, #004895, #0061c9, #007bff);
+    background-image: linear-gradient(to bottom, var(--secondary-color), #7d96fd, #b1b5fc, #d8d6fa, #f9f9f9);
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
     padding: 10px;
     justify-content: center;
+    border-radius: 24px;
+    
 }
 
 .tutorial-div {
@@ -342,11 +356,11 @@ p {
     min-height: 500px;
     margin-left: 200px;
     padding: 50px 20px 20px 150px; /* Ajuste no padding para melhor espaçamento */
-    background-color: #ffffff; /* Fundo branco para um visual mais limpo */
+    background-image: linear-gradient(to right bottom, #ffffff, #f7f7f7, #efefef, #e8e8e8, #e0e0e0);
     border-radius: 14px;
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidade */
-    border: 1px solid #e0e0e0; /* Borda sutil para destacar o card */
+    border: 3px solid #e0e0e0; /* Borda sutil para destacar o card */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para hover */
 }
 
@@ -380,8 +394,9 @@ p {
     justify-content: space-between;
     gap: 40px;
     padding: 60px;
-    background-image: linear-gradient(to bottom, #051937, #171228, #190a1a, #12040d, #000000);
+    background-image: linear-gradient(to bottom, #f9f9f9, #bcbcbc, #828283, #4d4d4e, #1d1d1f);
     flex-wrap: wrap;
+    
 }
 
 .contact-info, .contact-form {
@@ -391,6 +406,8 @@ p {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    border-radius: 24px;
+    
 }
 
 .contact-info:hover, .contact-form:hover {
@@ -830,6 +847,7 @@ footer {
 
     .btn {
         width: 100%;
+        
     }
 
     .tutorial-div {
@@ -866,6 +884,45 @@ footer {
     }
 }
 
+/* =============================================================================
+     woman container
+   ============================================================================= */
+.woman-container{
+    width: 98vw;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: -100px;
+    border-radius: 24px;
+    background-image: url('../assets/propaganda-background.png');
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.woman-container h1{
+    font-size: 3rem;
+    
+    background-image: linear-gradient(to bottom, #007bff, var(--background-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+    
+
+}
+@media (max-width: 768px) {
+    .woman-container{
+        width: 90vw;
+        background-image: url('../assets/propaganda-background-mobile.png');
+        background-attachment:local;
+        background-position: center;
+        background-size: cover;
+    }
+}
 /* =============================================================================
    BOTÃO HAMBÚRGUER (PARA DISPOSITIVOS MÓVEIS)
    ============================================================================= */
@@ -926,4 +983,21 @@ footer {
 /* Ajuste específico para o input de troco */
 #change-for {
     font-size: 16px; /* Tamanho mínimo para evitar zoom */
+}
+
+.remove-button{
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    width: 60px;
+    height: 30px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+.remove-button:hover{
+
+    background-color: var(--secondary-color);
+    
 }

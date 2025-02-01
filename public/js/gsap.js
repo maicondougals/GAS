@@ -31,6 +31,8 @@ gsap.from(".buttons", {
     ease: "power2.out",
 });
 
+
+
 gsap.from(".hero-image img", {
     opacity: 0,
     x: 100, // Move a imagem para a direita
@@ -64,8 +66,55 @@ gsap.utils.toArray(".tutorial-div img").forEach((img) => {
         duration: 1,
         scrollTrigger: {
             trigger: img, // Elemento que dispara a animação
-            start: "top 10%", // Quando o topo da imagem chegar a 80% da tela
+            start: "top 50%", // Quando o topo da imagem chegar a 80% da tela
             toggleActions: "play none none none", // Dispara a animação uma vez
+            markers:false
         },
     });
 });
+
+
+
+const tutorialContainer = document.querySelector('.tutorial-container');
+
+// Crie a animação com GSAP
+gsap.to(tutorialContainer, {
+    borderRadius: 0, // Altera a borda para 0
+    width:'100vw',
+    y:-100,
+  scrollTrigger: {
+    trigger: tutorialContainer, // Elemento que vai disparar a animação
+    start: "top 60%", // Quando o topo do elemento chegar a 25% da tela
+    end: "top top", // Quando o fundo do elemento chegar a 75% da tela
+    scrub: 2, // Faz a animação ser suave e acompanhar o scroll
+    markers: false // Opcional: mostra marcadores para debug (true para ver)
+  }
+});
+
+
+
+gsap.to('.woman-container',{
+    opacity:1,
+    duration:1,
+    y:100,
+    scrollTrigger: {
+        trigger: '.woman-container',
+        start: 'top center',
+        end:'top top',
+       
+        
+    }
+})
+gsap.to('.woman-container h1',{
+    opacity:1,
+    duration:1,
+    
+    scrollTrigger: {
+        trigger: '.woman-container',
+        start: 'top 20%',
+        
+
+       
+        
+    }
+})
