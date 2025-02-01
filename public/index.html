@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
@@ -26,6 +26,7 @@
                 <li><a href="#pedir">Pedir Delivery</a></li>
                 <li><a href="#tutorial">Aprenda a instalar o Botijão</a></li>
                 <li><a href="#local">Onde nos encontrar</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
             <!-- Ícone do Carrinho -->
             <div class="cart-indicator" id="cart-indicator">
@@ -198,8 +199,41 @@
         </div>
     </section>
 
-    <section class="local-container" id="local">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122752.85463917108!2d-47.792744983812064!3d-15.959981635323992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9359f596fc0fff41%3A0x5b2c74fdaa5fea04!2zU8OjbyBTZWJhc3Rpw6NvLCBCcmFzw61saWEgLSBERg!5e0!3m2!1spt-BR!2sbr!4v1738337668157!5m2!1spt-BR!2sbr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section class="contato-container" id="contato">
+        <form action="" class="contato-form">
+
+        </form>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-info">
+            <h2>Entre em Contato</h2>
+            <p>Estamos aqui para ajudar. Entre em contato conosco através dos seguintes canais:</p>
+            <ul>
+                <li><a href="https://wa.me/seunumerodewhatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                <li><a href="mailto:seuemail@dominio.com"><i class="fas fa-envelope"></i> Email</a></li>
+                <li><a href="tel:+5511999999999"><i class="fas fa-phone"></i> Telefone</a></li>
+                <li><a href="https://instagram.com/seuinstagram" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+            </ul>
+        </div>
+        <div class="contact-form">
+            <h2>Envie uma Mensagem</h2>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Seu Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="Seu WhatsApp" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="mensagem" name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+                </div>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </div>
     </section>
 
     <footer>

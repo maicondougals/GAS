@@ -191,7 +191,7 @@ p {
    ORDER SECTION (CARDS DE PRODUTOS)
    ============================================================================= */
    .order-section {
-    padding: 2rem 0;
+    padding: 2rem ;
     max-width: 800px;
     
     margin: 0 auto;
@@ -199,6 +199,8 @@ p {
 
 .container {
     padding: 0 20px;
+    background-color:whitesmoke;
+    border-radius: 24px;
 }
 
 .main-title {
@@ -218,6 +220,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    
 }
 
 .gas-options, .water-options, .accessories-options {
@@ -325,7 +328,7 @@ p {
 .tutorial-container {
     width: 100vw;
     height: auto;
-    background-color: whitesmoke;
+    background-image: linear-gradient(to top, #051937, #042f64, #004895, #0061c9, #007bff);
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
@@ -368,6 +371,157 @@ p {
 .tutorial-div p {
     color: var(--text-color);
 }
+/* =============================================================================
+   CONTATO SECTION
+   ============================================================================= */
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px;
+    background-image: linear-gradient(to bottom, #051937, #171228, #190a1a, #12040d, #000000);
+    flex-wrap: wrap;
+}
+
+.contact-info, .contact-form {
+    flex: 1;
+    padding: 40px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.contact-info:hover, .contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-info h2, .contact-form h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.contact-info h2::after, .contact-form h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.contact-info p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info ul li {
+    margin-bottom: 20px;
+}
+
+.contact-info ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.contact-info ul li a i {
+    margin-right: 15px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.contact-info ul li a:hover {
+    color: var(--accent-color);
+    transform: translateX(10px);
+}
+
+.contact-info ul li a:hover i {
+    color: var(--accent-color);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    outline: none;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.contact-form button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.contact-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .contact-section {
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .contact-info, .contact-form {
+        margin: 10px 0;
+        padding: 25px;
+    }
+
+    .contact-info h2, .contact-form h2 {
+        font-size: 1.8rem;
+    }
+
+    .contact-info ul li a {
+        font-size: 1rem;
+    }
+
+    .contact-form button {
+        width: 100%;
+    }
+}
 
 /* =============================================================================
    LOCAL SECTION
@@ -389,7 +543,7 @@ footer {
     background-color: var(--text-color);
     color: #fff;
     padding: 2rem 0;
-    margin-top: 2rem;
+    
 }
 
 .footer-content {
