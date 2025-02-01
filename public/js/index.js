@@ -290,3 +290,34 @@ document.addEventListener('DOMContentLoaded', function () {
         renderCartItems(); // Re-renderiza os itens do carrinho para atualizar o total
     });
 });
+
+
+
+
+
+function verificarStatusLoja() {
+    const agora = new Date();
+    const hora = agora.getHours();
+    const minutos = agora.getMinutes();
+    const statusElement = document.getElementById('status-text');
+
+    // Definir horário de funcionamento (exemplo: 8h às 18h)
+    const horaAbertura = 8;
+    const horaFechamento = 18;
+
+    if (hora >= horaAbertura && hora < horaFechamento) {
+        statusElement.textContent = `Loja aberta! Horário atual: ${hora}:${minutos < 10 ? '0' + minutos : minutos}`;
+        statusElement.classList.remove('fechada');
+        statusElement.classList.add('aberta');
+    } else {
+        statusElement.textContent = `Loja fechada. Horário atual: ${hora}:${minutos < 10 ? '0' + minutos : minutos}`;
+        statusElement.classList.remove('aberta');
+        statusElement.classList.add('fechada');
+    }
+}
+
+// Verificar o status da loja ao carregar a página
+verificarStatusLoja();
+
+// Atualizar o status a cada minuto
+setInterval(verificarStatusLoja, 60000);

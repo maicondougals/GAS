@@ -885,6 +885,38 @@ footer {
 }
 
 /* =============================================================================
+    status container
+   ============================================================================= */
+
+
+.status-container {
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.status-loja {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    display: inline-block;
+}
+
+#status-text {
+    font-size: 1.2em;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.aberta {
+    color: var(--primary-color);
+}
+
+.fechada {
+    color: var(--error-color);
+}
+/* =============================================================================
      woman container
    ============================================================================= */
 .woman-container{
