@@ -44,8 +44,8 @@ gsap.from(".hero-image img", {
 // Inicializa o plugin ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-// Animação para os títulos da seção tutorial
-gsap.utils.toArray(".tutorial-div h2").forEach((title) => {
+// Animação para os títulos da seção dica
+gsap.utils.toArray(".dica-div h2").forEach((title) => {
     gsap.from(title, {
         opacity: 0,
         y: 50, // Move o título para baixo
@@ -58,8 +58,8 @@ gsap.utils.toArray(".tutorial-div h2").forEach((title) => {
     });
 });
 
-// Animação para as imagens da seção tutorial
-gsap.utils.toArray(".tutorial-div img").forEach((img) => {
+// Animação para as imagens da seção dica
+gsap.utils.toArray(".dica-div img").forEach((img) => {
     gsap.from(img, {
         opacity: 0,
         x: -100, // Move a imagem para a esquerda
@@ -75,15 +75,15 @@ gsap.utils.toArray(".tutorial-div img").forEach((img) => {
 
 
 
-const tutorialContainer = document.querySelector('.tutorial-container');
+const dicaContainer = document.querySelector('.dica-container');
 
 // Crie a animação com GSAP
-gsap.to(tutorialContainer, {
+gsap.to(dicaContainer, {
     borderRadius: 0, // Altera a borda para 0
     width:'100vw',
     y:-100,
   scrollTrigger: {
-    trigger: tutorialContainer, // Elemento que vai disparar a animação
+    trigger: dicaContainer, // Elemento que vai disparar a animação
     start: "top 60%", // Quando o topo do elemento chegar a 25% da tela
     end: "top top", // Quando o fundo do elemento chegar a 75% da tela
     scrub: 2, // Faz a animação ser suave e acompanhar o scroll
@@ -163,6 +163,20 @@ gsap.to('.woman-container',{
     scrollTrigger: {
         trigger: '.woman-container',
         start: 'bottom center',
+        //end:'bottom top',
+        scrub:1
+
+       
+        
+    }
+})
+
+gsap.to('.phone-mockup',{
+    scale:1,
+    
+    scrollTrigger: {
+        trigger: '.carousel',
+        start: 'top center',
         //end:'bottom top',
         scrub:1
 

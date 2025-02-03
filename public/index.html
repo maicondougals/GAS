@@ -24,7 +24,7 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#pedir">Pedir Rápido</a></li>
-                <li><a href="#tutorial">Dicas</a></li>
+                <li><a href="#dica">Dicas</a></li>
                 <li><a href="#local">Onde nos encontrar</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
@@ -81,6 +81,35 @@
         <h1>Peça e receba em casa</h1>
     </section>
 
+    <div class="carousel">
+        <div class="carousel-inner">
+            <!-- Molde do iPhone 15 -->
+            <div class="phone-mockup">
+                <img src="assets/mockup.png" alt="iPhone 15 Mockup" class="mockup">
+                <img src="assets/Passo1.jpeg.png" alt="Passo 1" class="step-image active">
+                <img src="assets/Passo2.jpeg.png" alt="Passo 2" class="step-image">
+                <img src="assets/Passo3.jpeg.png" alt="Passo 3" class="step-image">
+            </div>
+    
+            <!-- Título e Descrição -->
+            <div class="step-info">
+                <h2 class="step-title">Passo 1</h2>
+                <p class="step-description">
+                    <strong>1. Escolha o item que deseja e a quantidade desejada:</strong><br>
+                    Navegue pela nossa seleção de produtos e <strong>escolha o item</strong> 
+                    que melhor atende às suas necessidades. Após selecionar, use os botões de 
+                    <strong>+</strong> e <strong>-</strong> para definir a <strong>quantidade desejada</strong>. 
+                    Clique em <strong>"Comprar"</strong> ou <strong>"Trocar"</strong> para adicionar o item ao 
+                    seu carrinho.
+                </p>
+                <div class="navigation">
+                    <button class="prev-btn">&larr; Anterior</button>
+                    <button class="next-btn">Próximo &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="order-section" id="pedir">
         <div class="container">
             <h1 class="main-title">Produtos disponíveis</h1>
@@ -98,6 +127,8 @@
                             <span class="info-value">13 kg</span>
                             <span class="info-label">Gás:</span>
                             <span class="info-value">GLP</span>
+                            <span class="info-label">Tipo:</span>
+                            <span class="info-value">P13</span>
                         </div>
                         <div class="button-wrapper" id="buy-full-gas">
                             <div class="counter">
@@ -118,6 +149,8 @@
                             <span class="info-value">13 Kg</span>
                             <span class="info-label">Gás:</span>
                             <span class="info-value">GLP</span>
+                            <span class="info-label">Tipo:</span>
+                            <span class="info-value">P13</span>
                         </div>
                         <div class="button-wrapper" id="buy-full-gas">
                             <div class="counter">
@@ -182,7 +215,25 @@
                             <span class="info-label">Preço:</span>
                             <span class="info-value price">R$ 49,99</span>
                             <span class="info-label">Compatível com:</span>
-                            <span class="info-value">GLP</span>
+                            <span class="info-value">Botijão P13</span>
+                        </div>
+                        <div class="button-wrapper" id="buy-accessory">
+                            <div class="counter">
+                                <button class="counter-button minus">-</button>
+                                <span class="quantity">0</span>
+                                <button class="counter-button plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-card" data-product-name="Suporte para Botijão" data-product-price="59.99">
+                        <img src="assets/suporte.jpg" alt="Suporte para Botijão" class="product-icon" loading="lazy">
+                        <h2 class="option-title"><hr>Suporte para Botijão</h2>
+                        <p class="option-description">Suporte para botijão com rodinhas.</p>
+                        <div class="product-info">
+                            <span class="info-label">Preço:</span>
+                            <span class="info-value price">R$ 59,99</span>
+                            <span class="info-label">Compatível com:</span>
+                            <span class="info-value">Botijão P13</span>
                         </div>
                         <div class="button-wrapper" id="buy-accessory">
                             <div class="counter">
@@ -197,24 +248,24 @@
         </div>
     </section>
 
-    <section class="tutorial-container" id="tutorial">
+    <section class="dica-container" id="dica">
         <h1 class="main-title">Veja abaixo os passos para instalar o Gás de cozinha</h1>
-        <div class="tutorial-div">
+        <div class="dica-div">
             <img src="assets/1.png" alt="Número 1" loading="lazy">
             <h2>Verifique os equipamentos e a segurança</h2>
             <p>Antes de começar, certifique-se de que todos os <strong>equipamentos</strong> estejam em boas condições. Verifique se o <strong>botijão de gás</strong>, a <strong>mangueira</strong> e o <strong>regulador de pressão</strong> estão sem rachaduras, vazamentos ou danos. Além disso, mantenha o ambiente <strong>ventilado</strong> e afaste qualquer fonte de <strong>ignição</strong>, como fósforos ou isqueiros, para evitar acidentes.</p>
         </div>
-        <div class="tutorial-div">
+        <div class="dica-div">
             <img src="assets/2.png" alt="Número 2" loading="lazy">
             <h2>Conecte o regulador ao botijão de gás</h2>
             <p>Posicione o <strong>botijão de gás</strong> em um local estável e seguro. Em seguida, rosqueie o <strong>regulador de pressão</strong> na válvula do botijão, girando no sentido horário. Certifique-se de que a <strong>conexão</strong> esteja firme, mas sem forçar demais para não danificar a rosca. Após conectar, abra a <strong>válvula</strong> do botijão lentamente para verificar se não há <strong>vazamentos</strong>.</p>
         </div>
-        <div class="tutorial-div">
+        <div class="dica-div">
             <img src="assets/3.png" alt="Número 3" loading="lazy">
             <h2>Conecte a mangueira ao fogão</h2>
             <p>Agora, conecte a <strong>mangueira de gás</strong> ao <strong>regulador</strong> e ao <strong>fogão</strong>. Certifique-se de que as <strong>conexões</strong> estejam bem apertadas, mas sem exagerar. Use uma solução de <strong>água com sabão</strong> para testar se há <strong>vazamentos</strong>: aplique a mistura nas conexões e observe se aparecem bolhas. Se não houver bolhas, está tudo certo!</p>
         </div>
-        <div class="tutorial-div">
+        <div class="dica-div">
             <img src="assets/4.png" alt="Número 4" loading="lazy">
             <h2>Teste o funcionamento</h2>
             <p>Por fim, acenda o <strong>fogão</strong> para verificar se o <strong>gás</strong> está fluindo corretamente. Se as <strong>chamas</strong> estiverem azuis e estáveis, a <strong>instalação</strong> foi bem-sucedida. Caso contrário, desligue o <strong>gás</strong> imediatamente e revise as <strong>conexões</strong> ou entre em contato com um <strong>profissional qualificado</strong>.</p>
@@ -269,7 +320,7 @@
                 <ul>
                     <li><a href="#inicio">Início</a></li>
                     <li><a href="#pedir">Pedir Delivery</a></li>
-                    <li><a href="#tutorial">Dicas</a></li>
+                    <li><a href="#dica">Dicas</a></li>
                     <li><a href="#local">Onde nos encontrar</a></li>
                 </ul>
             </div>
@@ -342,5 +393,6 @@
     <script src="js/index.js" defer></script>
     <script src="js/hamburger.js" defer></script>
     <script src="js/gsap.js"></script>
+    <script src="js/carrossel.js"></script>
 </body>
 </html>

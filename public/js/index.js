@@ -322,7 +322,3 @@ verificarStatusLoja();
 
 // Atualizar o status a cada minuto
 setInterval(verificarStatusLoja, 60000);
-
-
-
-

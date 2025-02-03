@@ -28,6 +28,8 @@ html {
     --background-color: #f9f9f9; /* Fundo claro */
     --accent-color: #ff9500; /* Laranja Apple */
     --error-color: #ff3b30; /* Vermelho Apple */
+
+    --transition: .4s all;
 }
 
 /* =============================================================================
@@ -330,23 +332,21 @@ p {
     font-size: 1.2rem;
     color: var(--text-color);
 }
-.cart-item  .quantity{
-    color: var(--background-color);
-}
+
 .quantity-control{
     min-width: 90px;
    
 }
 
 /* =============================================================================
-   TUTORIAL SECTION
+   dica SECTION
    ============================================================================= */
 
    /* Adicione ao final do seu arquivo CSS */
-.tutorial-div {
-    margin-bottom: 100px; /* Espaço entre os itens da seção tutorial */
+.dica-div {
+    margin-bottom: 100px; /* Espaço entre os itens da seção dica */
 }
-.tutorial-container {
+.dica-container {
     width: 95vw;
     margin: 0 auto;
     height: auto;
@@ -359,11 +359,11 @@ p {
     border-radius: 24px;
     
 }
-.tutorial-container h1{
+.dica-container h1{
     width: 100%;
 }
 
-.tutorial-div {
+.dica-div {
     width: 100%;
     max-width: 500px;
     min-height: 500px;
@@ -377,11 +377,11 @@ p {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para hover */
 }
 
-.tutorial-div:hover {
+.dica-div:hover {
     transform: translateY(-5px); /* Efeito de levantar o card ao passar o mouse */
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada no hover */
 }
-.tutorial-div img {
+.dica-div img {
     position: absolute;
     left: -200px;
     top: 0;
@@ -390,12 +390,12 @@ p {
     height: auto;
 }
 
-.tutorial-div h2 {
+.dica-div h2 {
     text-align: center;
     color: var(--text-color);
 }
 
-.tutorial-div p {
+.dica-div p {
     color: var(--text-color);
 }
 /* =============================================================================
@@ -407,7 +407,7 @@ p {
     justify-content: space-between;
     gap: 40px;
     padding: 60px;
-    background-image: linear-gradient(to bottom, #f9f9f9, #bcbcbc, #828283, #4d4d4e, #1d1d1f);
+    background-image: linear-gradient(to bottom, #f9f9f9, #e9e8f5, #d7d8f1, #c2c9ee, #abbaeb, #abbaeb, #abbaeb, #abbaeb, #c2c9ee, #d7d8f1, #e9e8f5, #f9f9f9);
     flex-wrap: wrap;
     
 }
@@ -426,6 +426,7 @@ p {
 .contact-info:hover, .contact-form:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transition: var(--transition);
 }
 
 .contact-info h2, .contact-form h2 {
@@ -476,11 +477,13 @@ p {
     font-size: 1.5rem;
     color: var(--primary-color);
     transition: var(--transition);
+    
 }
 
 .contact-info ul li a:hover {
     color: var(--accent-color);
     transform: translateX(10px);
+    transition: .4s all;
 }
 
 .contact-info ul li a:hover i {
@@ -902,11 +905,11 @@ footer {
         
     }
 
-    .tutorial-div {
+    .dica-div {
         margin-left: 100px;
     }
 
-    .tutorial-div img {
+    .dica-div img {
         left: -110px;
     }
 
@@ -918,20 +921,20 @@ footer {
 }
 
 @media (max-width: 436px) {
-    .tutorial-div {
+    .dica-div {
         margin: 0;
         padding: 10px;
     }
 
-    .tutorial-div h2 {
+    .dica-div h2 {
         margin-left: 100px;
     }
 
-    .tutorial-div p {
+    .dica-div p {
         margin-top: 200px;
     }
 
-    .tutorial-div img {
+    .dica-div img {
         left: -10px;
     }
 }
@@ -1043,6 +1046,120 @@ footer {
         background-position: center;
         background-size: cover;
     }
+}
+
+/* =============================================================================
+   CARROSSEL 
+   ============================================================================= */
+
+.carousel {
+    width: 100vw;
+    height: auto;
+    padding: 50px 20px;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    margin-top: 100px;
+    
+}
+
+.carousel-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.phone-mockup {
+    position: relative;
+    width: 300px; /* Ajuste conforme necessário */
+    height: auto;
+    z-index: 3;
+    transform: scale(.8);
+    
+}
+
+.mockup {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 3;
+    
+}
+
+.step-image {
+    position: absolute;
+    top: 2%; /* Ajuste conforme necessário */
+    left: 50%; /* Ajuste conforme necessário */
+    transform: translateX(-50%);
+    width: 89%; /* Ajuste conforme necessário */
+    height: auto;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 0;
+    border-radius: 30px;
+}
+
+.step-image.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.step-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 40%;
+    margin-left: 20px;
+}
+
+.step-title {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.step-description {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.navigation {
+    display: flex;
+    gap: 10px;
+}
+@media (max-width: 768px) {
+    
+    .navigation{
+        flex-direction: column;
+    }
+    .carousel-inner{
+        flex-direction: column-reverse;
+        
+    }
+    .step-info{
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px 0;
+    }
+}
+.prev-btn, .next-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: var(--accent-color);
 }
 /* =============================================================================
    BOTÃO HAMBÚRGUER (PARA DISPOSITIVOS MÓVEIS)
