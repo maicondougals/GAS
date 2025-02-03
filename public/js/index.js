@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const neighborhoodSelect = document.getElementById('neighborhood');
     const streetInput = document.getElementById('street');
     const houseNumberInput = document.getElementById('house-number');
-    const cepInput = document.getElementById('cep');
+    
     const observationTextarea = document.getElementById('observation');
     const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
     const changeSection = document.getElementById('change-section');
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Botão para remover o item do carrinho (usando uma imagem)
             const removeButton = document.createElement('img');
-            removeButton.src = 'assets/lixeira.png'; // Caminho da imagem
+            removeButton.src = 'assets/lixeira.webp'; // Caminho da imagem
             removeButton.className = 'remove-button'; // Classe para estilização
             removeButton.setAttribute('data-product', item.name); // Atributo para identificar o produto
             removeButton.alt = 'Remover'; // Texto alternativo para acessibilidade
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para validar o formulário de endereço
     function validateAddressForm() {
-        if (!neighborhoodSelect.value || !streetInput.value || !houseNumberInput.value || !cepInput.value) {
+        if (!neighborhoodSelect.value || !streetInput.value || !houseNumberInput.value) {
             alert('Por favor, preencha todos os campos obrigatórios do endereço.');
             return false;
         }
@@ -242,7 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
         summary += `Bairro: ${neighborhoodSelect.options[neighborhoodSelect.selectedIndex].text}\n`;
         summary += `Rua: ${streetInput.value}\n`;
         summary += `Número: ${houseNumberInput.value}\n`;
-        summary += `CEP: ${cepInput.value}\n`;
         summary += `Observação: ${observationTextarea.value || 'Nenhuma'}\n`;
         summary += `\nForma de Pagamento: ${Array.from(paymentMethods).find(method => method.checked).value}\n`;
         if (Array.from(paymentMethods).find(method => method.checked).value === 'Dinheiro' && !noChangeCheckbox.checked) {

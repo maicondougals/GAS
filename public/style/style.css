@@ -101,7 +101,7 @@ nav {
     padding: 2rem;
     width: 100vw;
     margin: 0 auto;
-    background-image: url('../assets/background.png');
+    background-image: url('../assets/background.webp');
     background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
@@ -888,7 +888,7 @@ footer {
     .hero {
         flex-direction: column;
         text-align: center;
-        background-image: url(../assets/background-mobile.png);
+        background-image: url(../assets/background-mobile.webp);
         background-position: bottom;
     }
 
@@ -1016,7 +1016,7 @@ footer {
     margin: 0 auto;
     margin-top: -100px;
     border-radius: 24px;
-    background-image: url('../assets/propaganda-background.png');
+    background-image: url('../assets/propaganda-background.webp');
     background-position: center;
     background-size: cover;
     filter: blur(5px);
@@ -1041,7 +1041,7 @@ footer {
 @media (max-width: 768px) {
     .woman-container{
         width: 90vw;
-        background-image: url('../assets/propaganda-background-mobile.png');
+        background-image: url('../assets/propaganda-background-mobile.webp');
         background-attachment:local;
         background-position: center;
         background-size: cover;
