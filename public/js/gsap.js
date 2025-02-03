@@ -177,7 +177,7 @@ gsap.to('.phone-mockup',{
     scrollTrigger: {
         trigger: '.carousel',
         start: 'top center',
-        //end:'bottom top',
+        end:'top 20%',
         scrub:1
 
        
